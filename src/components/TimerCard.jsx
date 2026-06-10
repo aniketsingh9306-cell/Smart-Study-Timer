@@ -169,8 +169,9 @@ function TimerCard() {
                 max="15"
                 value={shortTime}
                 onChange={e => {
-                  setShortTime(Number(e.target.value))
-                  if (mode === 'short') setTimeLeft(Number(e.target.value) * 60)
+                  const val = Math.min(15, Math.max(1, Number(e.target.value)))
+                  setShortTime(val)
+                  if (mode === 'short') setTimeLeft(val * 60)
                 }}
                 className="w-full bg-gray-800 border border-gray-700 rounded-xl px-2 py-2 text-white text-center font-bold outline-none focus:border-green-500"
               />
@@ -183,8 +184,9 @@ function TimerCard() {
                 max="120"
                 value={longTime}
                 onChange={e => {
-                  setLongTime(Number(e.target.value))
-                  if (mode === 'long') setTimeLeft(Number(e.target.value) * 60)
+                  const val = Math.min(120, Math.max(1, Number(e.target.value)))
+                  setLongTime(val)
+                  if (mode === 'long') setTimeLeft(val * 60)
                 }}
                 className="w-full bg-gray-800 border border-gray-700 rounded-xl px-2 py-2 text-white text-center font-bold outline-none focus:border-yellow-500"
               />
@@ -252,15 +254,14 @@ function TimerCard() {
       <div className="flex gap-3 mt-8">
         {[1, 2, 3].map((dot) => (
           <div key={dot}
-            className={`h-3 rounded-full transition-all duration-300 ${
-              mode === 'focus' && dot === 1
-                ? 'w-6 bg-indigo-600 opacity-100'
-                : mode === 'short' && dot === 2
+            className={`h-3 rounded-full transition-all duration-300 ${mode === 'focus' && dot === 1
+              ? 'w-6 bg-indigo-600 opacity-100'
+              : mode === 'short' && dot === 2
                 ? 'w-6 bg-green-600 opacity-100'
                 : mode === 'long' && dot === 3
-                ? 'w-6 bg-yellow-500 opacity-100'
-                : 'w-3 bg-gray-700 opacity-40'
-            }`}
+                  ? 'w-6 bg-yellow-500 opacity-100'
+                  : 'w-3 bg-gray-700 opacity-40'
+              }`}
           />
         ))}
       </div>
