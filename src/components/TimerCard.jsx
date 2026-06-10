@@ -36,7 +36,6 @@ function TimerCard() {
   }
 
   const current = modeConfig[mode]
-
   const total = mode === 'focus' ? focusTime * 60 : mode === 'short' ? shortTime * 60 : longTime * 60
   const progress = ((total - timeLeft) / total) * 100
   const radius = 108
@@ -152,7 +151,8 @@ function TimerCard() {
             <div className="text-center">
               <p className="text-xs text-indigo-400 mb-2">🎯 Focus</p>
               <input
-                type="number" min="1"
+                type="number"
+                min="1"
                 value={focusTime}
                 onChange={e => {
                   setFocusTime(Number(e.target.value))
@@ -164,7 +164,9 @@ function TimerCard() {
             <div className="text-center">
               <p className="text-xs text-green-400 mb-2">☕ Short</p>
               <input
-                type="number" min="1"
+                type="number"
+                min="1"
+                max="15"
                 value={shortTime}
                 onChange={e => {
                   setShortTime(Number(e.target.value))
@@ -176,7 +178,9 @@ function TimerCard() {
             <div className="text-center">
               <p className="text-xs text-yellow-400 mb-2">😴 Long</p>
               <input
-                type="number" min="1"
+                type="number"
+                min="1"
+                max="120"
                 value={longTime}
                 onChange={e => {
                   setLongTime(Number(e.target.value))
@@ -192,7 +196,6 @@ function TimerCard() {
       {/* SVG Progress Ring */}
       <div style={{ position: 'relative', width: 260, height: 260 }}>
         <svg width="260" height="260" style={{ transform: 'rotate(-90deg)', position: 'absolute' }}>
-          {/* Background track ring */}
           <circle
             cx="130" cy="130" r={radius}
             fill="#111827"
@@ -200,7 +203,6 @@ function TimerCard() {
             strokeWidth="10"
             opacity="0.3"
           />
-          {/* Progress ring */}
           <circle
             cx="130" cy="130" r={radius}
             fill="none"
@@ -216,7 +218,6 @@ function TimerCard() {
           />
         </svg>
 
-        {/* Center content */}
         <div style={{
           position: 'absolute', top: 0, left: 0,
           width: '100%', height: '100%',
